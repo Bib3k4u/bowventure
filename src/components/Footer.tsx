@@ -16,9 +16,9 @@ export function Footer() {
           <p className="eyebrow mb-4">Catalog</p>
           <ul className="space-y-2 text-sm">
             <li><Link to="/shop" className="hover:text-gold">All Products</Link></li>
-            <li><Link to="/shop" search={{ tier: "Rare Himalayan Reserve" }} className="hover:text-gold">Rare Reserve</Link></li>
-            <li><Link to="/shop" search={{ tier: "Ayurvedic Botanicals" }} className="hover:text-gold">Ayurvedic</Link></li>
-            <li><Link to="/shop" search={{ tier: "Gourmet Spices" }} className="hover:text-gold">Spices</Link></li>
+            <li><Link to="/shop" className="hover:text-gold">Rare Reserve</Link></li>
+            <li><Link to="/shop" className="hover:text-gold">Ayurvedic Botanicals</Link></li>
+            <li><Link to="/shop" className="hover:text-gold">Gourmet Spices</Link></li>
           </ul>
         </div>
         <div>
