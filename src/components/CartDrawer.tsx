@@ -70,7 +70,7 @@ export function CartDrawer() {
             </div>
             <p className="text-xs text-muted-foreground">Indicative pricing · final quote on Proforma Invoice. EXW Kathmandu by default.</p>
             <Link
-              to="/contact"
+              to="/checkout"
               onClick={() => setOpen(false)}
               className="block w-full text-center bg-ink text-paper py-4 text-sm tracking-[0.2em] uppercase hover:bg-gold transition-colors"
             >
