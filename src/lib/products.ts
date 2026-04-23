@@ -179,7 +179,17 @@ export const products: Product[] = [
     moq: "60 kg", leadTime: "2–4 weeks", priceFrom: 11, unit: "per kg", image: coffee,
   },
   {
-    slug: "herbal-tea", no: "15", name: "Herbal Tea Blends", latin: "Proprietary highland blends", native: "हर्बल चिया",
+    slug: "arabica-100", no: "15", name: "100% Arabica Coffee", latin: "Coffea arabica", native: "१००% अरेबिका",
+    tier: "Highland Beverages", origin: "Gulmi & Sindhupalchok · 1,400–1,900m",
+    tagline: "Pure 100% Arabica — single-estate, washed, micro-lot grade.",
+    description: "Strictly 100% Arabica beans, no Robusta blending. Hand-picked at peak ripeness, fully washed, sun-dried on raised beds. Cupping notes: jasmine, stone fruit, brown sugar finish. SCA score 84+.",
+    forms: "Specialty green · Light roast · Medium roast · Dark roast",
+    packaging: "60 kg GrainPro jute · Retail bags 250g / 500g / 1kg",
+    shelfLife: "Green 12 months · Roasted 9 months",
+    moq: "30 kg", leadTime: "2–4 weeks", priceFrom: 14, unit: "per kg", image: arabica100,
+  },
+  {
+    slug: "herbal-tea", no: "16", name: "Herbal Tea Blends", latin: "Proprietary highland blends", native: "हर्बल चिया",
     tier: "Highland Beverages", origin: "Multi-zone · Small-batch",
     tagline: "Highland botanicals, blended in small batches.",
     description: "House blends loose or in biodegradable pyramid bags. Custom blends to partner spec — retail-ready packaging available.",
