@@ -12,6 +12,7 @@ import cardamom from "@/assets/p-cardamom.jpg";
 import cinnamon from "@/assets/p-cinnamon.jpg";
 import turmeric from "@/assets/p-turmeric.jpg";
 import coffee from "@/assets/p-coffee.jpg";
+import arabica100 from "@/assets/p-arabica-100.jpg";
 import tea from "@/assets/p-tea.jpg";
 
 export type Tier = "Rare Himalayan Reserve" | "Ayurvedic Botanicals" | "Gourmet Spices" | "Highland Beverages";
