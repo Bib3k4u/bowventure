@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as QuotationConfirmedRouteImport } from './routes/quotation-confirmed'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
@@ -26,9 +28,19 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuotationConfirmedRoute = QuotationConfirmedRouteImport.update({
+  id: '/quotation-confirmed',
+  path: '/quotation-confirmed',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -50,7 +62,9 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/quotation-confirmed': typeof QuotationConfirmedRoute
   '/shop': typeof ShopRoute
   '/wholesale': typeof WholesaleRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -58,7 +72,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/quotation-confirmed': typeof QuotationConfirmedRoute
   '/shop': typeof ShopRoute
   '/wholesale': typeof WholesaleRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -67,7 +83,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/quotation-confirmed': typeof QuotationConfirmedRoute
   '/shop': typeof ShopRoute
   '/wholesale': typeof WholesaleRoute
   '/product/$slug': typeof ProductSlugRoute
@@ -77,17 +95,29 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/checkout'
     | '/contact'
+    | '/quotation-confirmed'
     | '/shop'
     | '/wholesale'
     | '/product/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/shop' | '/wholesale' | '/product/$slug'
+  to:
+    | '/'
+    | '/about'
+    | '/checkout'
+    | '/contact'
+    | '/quotation-confirmed'
+    | '/shop'
+    | '/wholesale'
+    | '/product/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/checkout'
     | '/contact'
+    | '/quotation-confirmed'
     | '/shop'
     | '/wholesale'
     | '/product/$slug'
@@ -96,7 +126,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
+  QuotationConfirmedRoute: typeof QuotationConfirmedRoute
   ShopRoute: typeof ShopRoute
   WholesaleRoute: typeof WholesaleRoute
   ProductSlugRoute: typeof ProductSlugRoute
@@ -118,11 +150,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quotation-confirmed': {
+      id: '/quotation-confirmed'
+      path: '/quotation-confirmed'
+      fullPath: '/quotation-confirmed'
+      preLoaderRoute: typeof QuotationConfirmedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -152,7 +198,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
+  QuotationConfirmedRoute: QuotationConfirmedRoute,
   ShopRoute: ShopRoute,
   WholesaleRoute: WholesaleRoute,
   ProductSlugRoute: ProductSlugRoute,
@@ -160,3 +208,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
