@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WholesaleRouteImport } from './routes/wholesale'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as QuotationConfirmedRouteImport } from './routes/quotation-confirmed'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AboutRouteImport } from './routes/about'
@@ -31,6 +32,11 @@ const ShopRoute = ShopRouteImport.update({
 const QuotationConfirmedRoute = QuotationConfirmedRouteImport.update({
   id: '/quotation-confirmed',
   path: '/quotation-confirmed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/projects': typeof ProjectsRoute
   '/quotation-confirmed': typeof QuotationConfirmedRoute
   '/shop': typeof ShopRoute
   '/wholesale': typeof WholesaleRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/projects': typeof ProjectsRoute
   '/quotation-confirmed': typeof QuotationConfirmedRoute
   '/shop': typeof ShopRoute
   '/wholesale': typeof WholesaleRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
+  '/projects': typeof ProjectsRoute
   '/quotation-confirmed': typeof QuotationConfirmedRoute
   '/shop': typeof ShopRoute
   '/wholesale': typeof WholesaleRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/checkout'
     | '/contact'
+    | '/projects'
     | '/quotation-confirmed'
     | '/shop'
     | '/wholesale'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/checkout'
     | '/contact'
+    | '/projects'
     | '/quotation-confirmed'
     | '/shop'
     | '/wholesale'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/checkout'
     | '/contact'
+    | '/projects'
     | '/quotation-confirmed'
     | '/shop'
     | '/wholesale'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
+  ProjectsRoute: typeof ProjectsRoute
   QuotationConfirmedRoute: typeof QuotationConfirmedRoute
   ShopRoute: typeof ShopRoute
   WholesaleRoute: typeof WholesaleRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/quotation-confirmed'
       fullPath: '/quotation-confirmed'
       preLoaderRoute: typeof QuotationConfirmedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
+  ProjectsRoute: ProjectsRoute,
   QuotationConfirmedRoute: QuotationConfirmedRoute,
   ShopRoute: ShopRoute,
   WholesaleRoute: WholesaleRoute,
@@ -208,3 +229,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
