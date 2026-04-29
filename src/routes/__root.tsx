@@ -1,5 +1,4 @@
-import { Outlet, createRootRoute, HeadContent, Scripts, Link } from "@tanstack/react-router";
-import appCss from "../styles.css?url";
+import { Outlet, createRootRoute, HeadContent, Link } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CartDrawer } from "@/components/CartDrawer";
@@ -21,40 +20,21 @@ function NotFoundComponent() {
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "BOW Ventures · Himalayan Highland Harvest" },
-      { name: "description", content: "Rare botanicals, gourmet spices, and highland reserves from the Nepalese Himalaya. Wild-harvested mad honey, Dolpa yarsagumba, Jumla saffron and more for retail distributors and wholesale partners." },
       { name: "author", content: "BOW Ventures" },
       { property: "og:title", content: "BOW Ventures · Himalayan Highland Harvest" },
       { property: "og:description", content: "Rare botanicals and gourmet spices from the Nepalese Himalaya." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
 
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
 function RootComponent() {
   return (
     <CartProvider>
+      <HeadContent />
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">
